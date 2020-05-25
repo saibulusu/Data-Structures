@@ -1,4 +1,3 @@
-#include <exception>
 #include <iostream>
 
 /** template for the ArrayList class **/
@@ -36,7 +35,7 @@ ArrayList<T>::~ArrayList() {
 template <typename T>
 T ArrayList<T>::get(int index) {
     if (index < 0 || index >= size) {
-        throw "Accessing out of bounds";
+        throw std::runtime_error("Accessing out of bounds");
     } else {
         return array[index];
     }
@@ -54,7 +53,7 @@ void ArrayList<T>::insert(T key) {
 template <typename T>
 void ArrayList<T>::insert(int index, T key) {
     if (index < 0 || index > size) {
-        throw "Inserting out of bounds";
+        throw std::runtime_error("Inserting out of bounds");
     } else {
         if (index == size) {
             insert(key);
@@ -73,7 +72,7 @@ void ArrayList<T>::insert(int index, T key) {
 template <typename T>
 T ArrayList<T>::alter(int index, T key) {
     if (index < 0 || index >= size) {
-        throw "Altering out of bounds";
+        throw std::runtime_error("Altering out of bounds");
     } else {
         T oldKey = remove(index);
         insert(index, key);
@@ -91,7 +90,7 @@ int ArrayList<T>::getSize() {
 template <typename T>
 T ArrayList<T>::remove(int index) {
     if (index < 0 || index >= size) {
-        throw "Removing out of bounds";
+        throw std::runtime_error("Removing out of bounds");
     } else {
         T oldKey = array[index];
         for (int i = index; i < size - 1; ++i) {
