@@ -61,7 +61,8 @@ T LinkedList<T>::get(int index) {
 template <typename T>
 void LinkedList<T>::insert(T key) {
     if (size == 0) {
-        head = tail = new ListNode<T>;
+		head = tail = new ListNode<T>;
+		tail->data = key;
         tail->next = nullptr;
         ++size;
         return;
@@ -81,7 +82,23 @@ void LinkedList<T>::insert(int index, T key) {
     }
     if (index == size) {
         insert(key);
-    }
+    } else if (index == 0) {
+		ListNode<T>* newHead = new ListNode<T>;
+		newHead->next = head;
+		newHead->data = key;
+		head = newHead;
+		++size;
+	} else {
+		ListNode<T>* cur = head;
+		while (index > 1) {
+			cur = cur->next;
+			--index;
+		}
+		ListNode<T>* toDelete = cur->next;
+		cur->next = toDelete->next->next;
+		delete toDelete;
+		--size;
+	}
 }
 
 /** Alter a value in the linked list at a certain index */

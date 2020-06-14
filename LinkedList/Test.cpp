@@ -3,7 +3,7 @@
 #include <exception>
 #include <gtest/gtest.h>
 #include <string>
-#include "LinkedList.cpp"           
+#include "LinkedList.cpp"
 
 /** Fixture class **/
 class LinkedListTest : public ::testing::Test {
@@ -116,13 +116,10 @@ TEST_F(LinkedListTest, InsertRemoveAlternateSize) {
 TEST_F(LinkedListTest, InsertRemoveAlternateValue) {
     try {
         list->insert(-100);
-        list->print();
-        int a = list->remove(0);
         list->insert(3030);
         list->insert(-1000);
-        int b = list->remove(1);
+        int b = list->remove(0);
         int val = list->get(0);
-        
         ASSERT_EQ(val, 3030);
     } catch (std::exception& e) {
         FAIL();
@@ -153,6 +150,7 @@ TEST_F(LinkedListTest, InsertFewInsertAtIndexValue) {
     }
 }
 
+// Run the tests
 int main(int argc, char* argv[]) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
