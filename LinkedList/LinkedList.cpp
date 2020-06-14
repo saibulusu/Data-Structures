@@ -1,12 +1,13 @@
 #include <iostream>
 
+/** ListNode class declarations */
 template <typename T>
 struct ListNode {
     ListNode<T>* next;
     T data;
 };
 
-/** Template for the LinkedList class */
+/** LinkedList class declarations */
 template <typename T>
 class LinkedList {
 private:
@@ -64,14 +65,13 @@ void LinkedList<T>::insert(T key) {
 		head = tail = new ListNode<T>;
 		tail->data = key;
         tail->next = nullptr;
-        ++size;
-        return;
+    } else {
+	    tail->next = new ListNode<T>;    
+	    tail->next->data = key;
+	    tail->next->next = nullptr;
+	    tail = tail->next;
     }
-    tail->next = new ListNode<T>;    
-    tail->next->data = key;
-    tail->next->next = nullptr;
-    tail = tail->next;
-    ++size;
+	++size;
 }
 
 /** Insert a value into the linked list at a certain index */
@@ -94,25 +94,34 @@ void LinkedList<T>::insert(int index, T key) {
 			cur = cur->next;
 			--index;
 		}
-		ListNode<T>* toDelete = cur->next;
-		cur->next = toDelete->next->next;
-		delete toDelete;
-		--size;
+		ListNode<T>* newNode = new ListNode<T>;
+		newNode->data = key;
+		newNode->next = cur->next;
+		cur->next = newNode;
+		++size;
 	}
 }
 
 /** Alter a value in the linked list at a certain index */
 template <typename T>
 T LinkedList<T>::alter(int index, T key) {
-    if (index > size || index < 0) {
+    if (index >= size || index < 0) {
         throw std::runtime_error("Altering out of bounds");
     }
+	ListNode<T>* cur = head;
+	while (index > 0) {
+		cur = cur->next;
+		--index;
+	}
+	T val = cur->data;
+	cur->data = key;
+	return val;
 }
 
 /** Remove a value in the linked list at a certain index */
 template <typename T>
 T LinkedList<T>::remove(int index) {
-    if (index > size || index < 0) {
+    if (index >= size || index < 0) {
         throw std::runtime_error("Removing out of bounds");
     }
     ListNode<T>* rem = head;

@@ -16,22 +16,26 @@ public:
     void print();
 };
 
+/** Construct the Queue with no initial elements */
 template <typename T>
 Queue<T>::Queue() {
     size = 0;
 }
 
+/** Destruct the Queue */
 template <typename T>
 Queue<T>::~Queue() {
     delete array;
     array = nullptr;
 }
 
+/** Access the size of the Queue */
 template <typename T>
 int Queue<T>::getSize() {
     return size;
 }
 
+/** Peek the element at the front of the Queue */
 template <typename T>
 T Queue<T>::peek() {
     if (size == 0) {
@@ -41,6 +45,7 @@ T Queue<T>::peek() {
     }
 }
 
+/** Enqueue a value to the end of the Queue */
 template <typename T>
 void Queue<T>::enqueue(T key) {
     array = (T*)realloc(array, (size + 1) * sizeof(T));
@@ -48,25 +53,23 @@ void Queue<T>::enqueue(T key) {
     ++size;
 }
 
+/** Dequeue a value from the front of the Queue */
 template <typename T>
 T Queue<T>::dequeue() {
     if (size == 0) {
         throw std::runtime_error("Dequeuing out of bounds");
     } else {
         T key = array[0];
-        T* temp;
-        temp = (T*)malloc((size - 1) * sizeof(T));
-        for (int i = 0; i < size - 1; ++i) {
-            temp[i] = array[i + 1];
-        }
-        delete array;
-        array = temp;
-        temp = nullptr;
+		for (int i = 0; i < size - 1; ++i) {
+			array[i] = array[i + 1];
+		}
+		array = (T*)realloc(array, (size - 1) * sizeof(T));
         --size;
         return key;
     }
 }
 
+/** Display the elements of the Queue from front to back */
 template <typename T>
 void Queue<T>::print() {
     for (int i = 0; i < size; ++i) {

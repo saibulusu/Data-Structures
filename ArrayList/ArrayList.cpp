@@ -1,6 +1,6 @@
 #include <iostream>
 
-/** template for the ArrayList class **/
+/** ArrayList class declarations */
 template <typename T>
 class ArrayList {
 private:
@@ -31,7 +31,7 @@ ArrayList<T>::~ArrayList() {
     array = nullptr;
 }
 
-/** Get a specific value by index from the ArrayList **/
+/** Get a specific value by index from the ArrayList */
 template <typename T>
 T ArrayList<T>::get(int index) {
     if (index < 0 || index >= size) {
@@ -41,7 +41,7 @@ T ArrayList<T>::get(int index) {
     }
 }
 
-/** Insert a value into the list at the end **/
+/** Insert a value into the list at the end */
 template <typename T>
 void ArrayList<T>::insert(T key) {
     array = (T*)realloc(array, sizeof(T) * (size + 1));
@@ -49,7 +49,7 @@ void ArrayList<T>::insert(T key) {
     ++size;
 }
 
-/** Insert a value into the list at a specific index **/
+/** Insert a value into the list at a specific index */
 template <typename T>
 void ArrayList<T>::insert(int index, T key) {
     if (index < 0 || index > size) {
@@ -68,7 +68,7 @@ void ArrayList<T>::insert(int index, T key) {
     }
 }
 
-/** Edit a value of the ArrayList at a specific index **/
+/** Edit a value of the ArrayList at a specific index */
 template <typename T>
 T ArrayList<T>::alter(int index, T key) {
     if (index < 0 || index >= size) {
@@ -80,13 +80,13 @@ T ArrayList<T>::alter(int index, T key) {
     }
 }
 
-/** Access the size of the ArrayList **/
+/** Access the size of the ArrayList */
 template <typename T>
 int ArrayList<T>::getSize() {
     return size;
 }
 
-/** Remove a value from the list at a specific index **/
+/** Remove a value from the list at a specific index */
 template <typename T>
 T ArrayList<T>::remove(int index) {
     if (index < 0 || index >= size) {
@@ -102,11 +102,11 @@ T ArrayList<T>::remove(int index) {
     }
 }
 
-/** Print the contents of the ArrayList **/
+/** Print the contents of the ArrayList */
 template <typename T>
 void ArrayList<T>::print() {
     for (int i = 0; i < size; ++i) {
         std::cout << array[i] << " ";
     }
     std::cout << std::endl;
-}    
+}

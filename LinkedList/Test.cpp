@@ -150,6 +150,33 @@ TEST_F(LinkedListTest, InsertFewInsertAtIndexValue) {
     }
 }
 
+/** Insert a few values then alter a value and check the return */
+TEST_F(LinkedListTest, InsertFewAlterReturn) {
+	try {
+		list->insert(0);
+		list->insert(0, 100);
+		list->insert(2, 900);
+		int val = list->alter(1, 200);
+		ASSERT_EQ(val, 0);
+	} catch (std::exception& e) {
+		FAIL();
+	}
+}
+
+/** Insert a few values then alter a value and check the value */
+TEST_F(LinkedListTest, InsertFewAlterValue) {
+	try {
+		list->insert(0);
+		list->insert(0, 100);
+		list->insert(2, 900);
+		int ret = list->alter(1, 200);
+		int val = list->get(1);
+		ASSERT_EQ(val, 200);
+	} catch (std::exception& e) {
+		FAIL();
+	}
+}
+
 // Run the tests
 int main(int argc, char* argv[]) {
     testing::InitGoogleTest(&argc, argv);

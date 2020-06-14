@@ -1,6 +1,6 @@
 #include <iostream>
 
-/** Stack class declarations **/
+/** Stack class declarations */
 template <typename T>
 class Stack {
 private:
@@ -16,7 +16,7 @@ public:
     void print();
 };
 
-/** Construct the Stack with no initial elements **/
+/** Construct the Stack with no initial elements */
 template <typename T>
 Stack<T>::Stack() {
     size = 0;
@@ -29,7 +29,7 @@ Stack<T>::~Stack() {
     array = nullptr;
 }
 
-/** Push an element onto the top of the stack **/
+/** Push an element onto the top of the stack */
 template <typename T>
 void Stack<T>::push(T key) {
     array = (T*)realloc(array, (size + 1) * sizeof(T));
@@ -37,7 +37,7 @@ void Stack<T>::push(T key) {
     ++size;
 }
 
-/** Pop an element from the top of the stack **/
+/** Pop an element from the top of the stack */
 template <typename T>
 T Stack<T>::pop() {
     if (size == 0) {
@@ -50,7 +50,7 @@ T Stack<T>::pop() {
     }
 }
 
-/** Peek the element at the top of the stack **/
+/** Peek the element at the top of the stack */
 template <typename T>
 T Stack<T>::peek() {
     if (size == 0) {
@@ -60,11 +60,13 @@ T Stack<T>::peek() {
     }
 }
 
+/** Access the size of the stack */
 template <typename T>
 int Stack<T>::getSize() {
     return size;
 }
 
+/** Display the elements of the stack from top to bottom */
 template <typename T>
 void Stack<T>::print() {
     for (int i = size - 1; i >= 0; --i) {
