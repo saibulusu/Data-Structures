@@ -36,6 +36,52 @@ BST<T>::~BST() {
     root = nullptr;
 }
 
+/** Insert a key into the tree */
+template <typename T>
+void BST<T>::insert(T key) {
+	if (root == nullptr) {
+		root = new TreeNode<T>;
+		root->data = key;
+	} else {
+		TreeNode<T>* cur = root;
+		while (cur != nullptr) {
+			if (cur->data == key) {
+				throw std::runtime_error("Inserting duplicate key");
+			} else {
+				cur = (cur->data < key) ? cur->right : cur->left;
+			}
+		}
+		cur = new TreeNode<T>;
+		cur->data = key;
+		++size;
+	}
+}
+
+/** Remove a key from the tree */
+template <typename T>
+T BST<T>::remove(T key) {
+	TreeNode<T>* cur = root;
+	while (cur != nullptr) {
+		if(cur->data == key) {	
+			if (cur->left == nullptr && cur->right == nullptr) {
+				T oldKey = cur->data;
+				delete cur;
+				return oldKey;
+			} else if (cur->left == nullptr) {
+				T oldKey = cur->data;
+				delete cur;
+				cur = cur->right;
+			} else if (cur->right == nullptr) {
+				T oldKey = cur->data;
+				delete cur;
+				cur = cur->left;
+			} else {
+				
+			}
+		}
+	}
+}
+
 /** Access the size of the BST */
 template <typename T>
 int BST<T>::getSize() {
